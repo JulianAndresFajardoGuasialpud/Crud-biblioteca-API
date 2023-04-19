@@ -12,7 +12,7 @@ class Book(models.Model):
     )
 
     class Meta:
-        ordering = ['body', 'id']
+        ordering = ['id', 'body']
 
     def __str__(self):
         return self.body

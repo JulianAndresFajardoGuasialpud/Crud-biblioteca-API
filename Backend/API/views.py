@@ -1,4 +1,5 @@
 # View: Una vista es una función de gestión de peticiones que recibe peticiones HTTP y devuelve respuestas HTTP. Las vistas acceden a los datos que necesitan para satisfacer las peticiones por medio de modelos, y delegan el formateo de la respuesta a las plantillas ("templates").
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -19,20 +20,19 @@ def getBooks(request):
 @api_view(['POST'])
 def postBooks(request):
     if request.method == "POST":
-     data = request.data
-    book = Book.objects.create(
-        #Error para guardar el dato el arreglo
-        body = data
-    )
-    serializer = BookSerializers(book, many=False)
-    return Response(serializer.data)
+        data = request.data
+        book = Book.objects.create(
+            body = data
+        )
+        serializer = BookSerializers(book, many=False)
+        return Response(serializer.data)
 
 
 @api_view(['PUT'])
 def putBooks(request, pk):
     data = request.data
     book = Book.objects.get(id=pk)
-    serializer = BookSerializers(instance=book, data= data)
+    serializer = BookSerializers(instance=book, data=data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
