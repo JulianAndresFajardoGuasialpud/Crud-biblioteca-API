@@ -20,7 +20,9 @@ def getBooks(request):
 @api_view(['POST'])
 def postBooks(request):
     if request.method == "POST":
+
         data = request.data
+
         book = Book.objects.create(
             body = data
         )
