@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import API from "./API";
+import { useEffect } from "react";
+import Welcome from "./components/welcome.tsx";
+import CounterHook from "./components/counter.tsx";
 
 function App() {
+  /* Function hook to get axios (los hook son funciones en las que podremos guardas estados de nuestros componentes)*/
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const datos = await API.getData();
+        console.log("Datos obtenidos:", datos);
+      } catch (errors) {
+        console.error("Error al obtener los datos:", errors);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Props, components</h1>
+      <Welcome message="Hola desde la pagina" name="julian" />
+      <br/>
+      <h2>components with hooks</h2>
+      <CounterHook/>
+    </>
   );
 }
 
