@@ -1,30 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 
-/*Import component tipos basicos*/
-/* import TiposBasicos from './components/tiposBasicos';
- */
-
-/*import component objetos literales*/
+/*import components*/
 import { ObjetosLiterales } from "./components/objetosLiterales";
+import { Funciones } from "./components/funciones";
+import { Contador } from "./components/Contador";
+import { CustomHooks } from "./components/CustomHooks";
+import TiposBasicos from "./components/tiposBasicos";
+import { Login } from "./components/Login";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Introduccion a TS - REACT-NATIVE</Text>
-
-      <StatusBar style="auto" />
-      {/*       <TiposBasicos/> */}
+    <View>
+      {/*    
+      <TiposBasicos/>
+      <Funciones/>
+      <Contador/>
+      <CustomHooks/>
+       */}
       <ObjetosLiterales />
+      <Login />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
