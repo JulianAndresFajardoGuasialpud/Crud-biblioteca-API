@@ -5,14 +5,15 @@ from django.db import models
 # Create your models here.
 # aqui se crea los modelos de la base de datos relacionales
 
-
 class Book(models.Model):
-    body = models.CharField(
+    id = models.AutoField(
+        primary_key=True
+    )
+    data = models.CharField(
         max_length=50
     )
-
     class Meta:
-        ordering = ['id', 'body']
+        ordering = ['id', 'data']
 
     def __str__(self):
-        return self.body
+        return self.data
