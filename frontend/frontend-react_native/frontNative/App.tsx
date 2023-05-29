@@ -7,6 +7,7 @@ import { Contador } from "./components/Contador";
 import { CustomHooks } from "./components/CustomHooks";
 import TiposBasicos from "./components/tiposBasicos";
 import { Login } from "./components/Login";
+import { Usuarios } from "./components/Usuarios";
 
 export default function App() {
   return (
@@ -18,7 +19,8 @@ export default function App() {
       <CustomHooks/>
        */}
       <ObjetosLiterales />
-      <Login />
+      {/* <Login /> */}
+      <Usuarios/>
     </View>
   );
 }

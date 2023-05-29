@@ -26,28 +26,21 @@ type loginUI = {
   password: string;
 };
 
-/*Define action to logout*/
-/* type logoutUI = {
-  username: string;
-  password: string;
-}; */
-
 /*Define actions to execute*/
-type AuthAction =
-  | { type: "login", payload: loginUI }
-  | { type: "logout" };
+type AuthAction = { type: "signIn"; payload: loginUI } | { type: "logout" };
 
 /*Define comportament of structures functions */
 const authReduce = (state: AuthState, action: AuthAction): AuthState => {
-
   switch (action.type) {
-    case "login":
+    case "signIn":
+      const {username, password} = action.payload;
       return {
         validation: false,
-        token: null,
-        username: "",
-        password: "",
+        token: "asdawdawdwdawd",
+        username,
+        password
       };
+
     case "logout":
       return {
         validation: false,
@@ -73,10 +66,10 @@ export const Login = () => {
     }, 1500);
   }, []);
 
-  /*Function to loginUI*/
+  /*Function to dispatch loginUI*/
   const loginUI = () => {
     dispatch({
-      type: "login",
+      type: "signIn",
       payload: {
         username: "Julian Fajardo",
         password: "B0dlfisx",
@@ -84,14 +77,10 @@ export const Login = () => {
     });
   };
 
-  /*Function to logoutUI with useEffect and setTimeOut*/
+  /*Function to dispatch logoutUI with useEffect and setTimeOut*/
   const logoutUI = () => {
     dispatch({
-      type: "login",
-      payload: {
-        username,
-        password: "B0dlfisx",
-      },
+      type: "logout",
     });
   };
 
@@ -102,7 +91,13 @@ export const Login = () => {
       <>
         <View style={{ margin: Constants.statusBarHeight }}>
           <Text
-            style={{ marginTop: 20, marginBottom: 15, alignSelf: "center", backgroundColor: "#4f5bff", color: "#fff" }}
+            style={{
+              marginTop: 20,
+              marginBottom: 15,
+              alignSelf: "center",
+              backgroundColor: "#4f5bff",
+              color: "#fff",
+            }}
           >
             Validating....
           </Text>
@@ -120,6 +115,7 @@ export const Login = () => {
         </Text>
 
         {/*Validation token*/}
+
         {token ? (
           <>
             <Text style={{ backgroundColor: "#00af0fca", color: "#fff" }}>
@@ -127,16 +123,23 @@ export const Login = () => {
             </Text>
             <Text style={{ marginBottom: 10 }}></Text>
             <Button
-              title="login"
+              title="logout"
               color={"#00af0fca"}
               onPress={logoutUI}
             ></Button>
           </>
         ) : (
           <>
-            <Text style={{ backgroundColor: "#bd1a1a", color: "#fff", textAlign: "center"}}>
+            <Text
+              style={{
+                backgroundColor: "#bd1a1a",
+                color: "#fff",
+                textAlign: "center",
+              }}
+            >
               No autenticado!
             </Text>
+            <Text style={{ marginBottom: 10 }}></Text>
             <Button title="signIn" onPress={loginUI}></Button>
           </>
         )}
