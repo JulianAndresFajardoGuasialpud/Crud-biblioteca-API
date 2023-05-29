@@ -4,9 +4,9 @@ import request from '../Request-API/API-backend';
 
 export const Usuarios = () => {
     useEffect(() => {
-        request.get("/")
+        request.get("admin/")
         .then(resp =>{
-          console.log(resp.data)
+          console.log(resp)
         })
         .catch(console.log)
     }, [])

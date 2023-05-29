@@ -6,14 +6,14 @@ from django.db import models
 # aqui se crea los modelos de la base de datos relacionales
 
 class Book(models.Model):
-    id = models.AutoField(
-        primary_key=True
+    id_book = models.AutoField(
+        primary_key=True,
     )
     data = models.CharField(
         max_length=50
     )
     class Meta:
-        ordering = ['id', 'data']
+        ordering = ['id_book', 'data']
 
     def __str__(self):
         return self.data

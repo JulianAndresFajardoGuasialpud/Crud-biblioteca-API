@@ -12,7 +12,7 @@ from ..serializers import BookSerializers
 
 @api_view(['GET'])
 def getBooks(request):
-    book = Book.objects.all().order_by('data')
+    book = Book.objects.all().order_by('id_book', 'data')
     serializer = BookSerializers(book, many=True)
     return Response(serializer.data)
 
@@ -31,9 +31,11 @@ def postBooks(request):
 
 
 @api_view(['PUT'])
-def putBooks(request, pk):
+def putBooks(request, id_book):
     data = request.data
-    book = Book.objects.get(id=pk)
+    book = Book.objects.get(
+        id_book=id_book
+    )
     serializer = BookSerializers(instance=book, data=data)
     if serializer.is_valid():
         serializer.save()
@@ -41,7 +43,9 @@ def putBooks(request, pk):
 
 
 @api_view(['DELETE'])
-def deleteBooks(request, pk):
-    book = Book.objects.get(id=pk)
+def deleteBooks(request, id_book):
+    book = Book.objects.get(
+        id_book=id_book
+    )
     book.delete()
     return Response("Book delete")

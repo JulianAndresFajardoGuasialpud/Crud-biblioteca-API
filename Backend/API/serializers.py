@@ -8,7 +8,7 @@ from .models import Book
 class BookSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Book
-        fields = ["data"]
+        fields = ["id_book", "data"]
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

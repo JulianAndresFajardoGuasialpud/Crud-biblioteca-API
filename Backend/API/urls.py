@@ -7,6 +7,6 @@ from API.Views import books
 urlpatterns = [
     path('get/', books.getBooks),
     path('post/', books.postBooks),
-    path('put/<int:pk>/', books.putBooks),
-    path('delete/<int:pk>/', books.deleteBooks),
+    path('put/<int:id_book>/', books.putBooks),
+    path('delete/<int:id_book>/', books.deleteBooks),
 ]
