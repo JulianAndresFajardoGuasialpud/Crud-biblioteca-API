@@ -5,10 +5,18 @@ from .models import Book
 # Serializer for methods book view
 # Serializers define the API representation.
 
+
 class BookSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Book
-        fields = ["id_book", "data"]
+        fields = [
+            "id_book",
+            "title_book",
+            "title_book",
+            "description",
+            "isbn_book"
+        ]
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
