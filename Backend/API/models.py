@@ -11,29 +11,25 @@ class Book(models.Model):
         primary_key=True,
     )
     title_book = models.CharField(
-        default='title',
+        editable=True,
         max_length=100
     )
     description = models.TextField(
-        default='Description',
+        editable=True,
         max_length=200
     )
     isbn_book = models.TextField(
-        default='ISBN',
+        editable=True,
         max_length=100
     )
-    author = models.ManyToManyField(
-        to='Author',
-    )
     class Meta:
-        ordering = ['id_book', 'title_book']
+        ordering = ['id_book', 'title_book', 'description', 'isbn_book']
 
     def __str__(self):
-        return self.title_book
+        return self.description
+
 
 # Author
-
-
 class Author(models.Model):
     id_author = models.AutoField(
         primary_key=True
@@ -49,9 +45,16 @@ class Author(models.Model):
     )
     id_book = models.ForeignKey(
         Book,
-        on_delete=models.DO_NOTHING,
+        default=True,
+        on_delete=models.CASCADE,
         related_name='id_book_author'
     )
+    class Meta:
+         ordering = ['name_author', 'date_of_birth', 'date_of_death', 'id_book']
+        
+    def __str__(self):
+        return self.name_author
+
 # Genre
 
 
