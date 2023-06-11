@@ -9,6 +9,7 @@ from django.db import models
 class Book(models.Model):
     id_book = models.AutoField(
         primary_key=True,
+        unique=True
     )
     title_book = models.CharField(
         editable=True,
@@ -18,9 +19,13 @@ class Book(models.Model):
         editable=True,
         max_length=200
     )
-    isbn_book = models.TextField(
+    isbn_book = models.CharField(
         editable=True,
         max_length=100
+    )
+    Author = models.ForeignKey(
+        'Author',
+        on_delete=models.DO_NOTHING
     )
     class Meta:
         ordering = ['id_book', 'title_book', 'description', 'isbn_book']
@@ -30,28 +35,22 @@ class Book(models.Model):
 
 
 # Author
-class Author(models.Model):
+class Author(models.ManyToOneRel):
     id_author = models.AutoField(
-        primary_key=True
+        primary_key=True,
+        default=True
     )
-    name_author = models.TextField(
-        max_length=50
+    name_author = models.CharField(
+        max_length=50,
     )
     date_of_birth = models.DateField(
-        editable=True
+        editable=True,
+        default=True
     )
     date_of_death = models.DateField(
-        editable=True
+        editable=True,
+        default=True
     )
-    id_book = models.ForeignKey(
-        Book,
-        default=True,
-        on_delete=models.CASCADE,
-        related_name='id_book_author'
-    )
-    class Meta:
-         ordering = ['name_author', 'date_of_birth', 'date_of_death', 'id_book']
-        
     def __str__(self):
         return self.name_author
 
