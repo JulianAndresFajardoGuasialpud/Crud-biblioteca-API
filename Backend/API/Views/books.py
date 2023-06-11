@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 # Importaciones propias
-from ..models import Book
+from ..models import Book, Author
 from ..serializers import BookSerializers
 
 # Create your views here.
@@ -12,7 +12,7 @@ from ..serializers import BookSerializers
 
 @api_view(['GET'])
 def getBooks(request):
-    book = Book.objects.all().order_by('id_book', 'data')
+    book = Book.objects.all()
     serializer = BookSerializers(book, many=True)
     return Response(serializer.data)
 
