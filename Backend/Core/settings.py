@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework.authtoken',
     'corsheaders',
-    'StoneTec',
+    'biblioteca',
+    'Users',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -76,7 +79,7 @@ REST_FRAMEWORK = {
 }
 
 ROOT_URLCONF = 'Core.urls'
-    
+
 
 TEMPLATES = [
     {
