@@ -5,16 +5,17 @@ from django.urls import path, include
 # Imports django REST framework
 from rest_framework import permissions
 from rest_framework.authtoken import views
+from rest_framework import routers
 
-# Imports of swagger for testing API
+# Imports of swagger for testing APIs
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-# Imports django REST framework
-from rest_framework import routers
-
-# Import viewSet user
+# Import ModelViews users
 from Users import views
+
+# Import biblioteca router
+from biblioteca.api.routerBiblioteca import router_biblioteca
 
 # Scheme swagger
 schema_view = get_schema_view(
@@ -27,13 +28,25 @@ schema_view = get_schema_view(
         license=openapi.License(name="BSD License"),
     ),
     public=True,
-    permission_classes=[permissions.AllowAny],
+    permission_classes=[permissions.IsAdminUser],
 )
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+
+# RegisterView Users
+router.register(
+    r'users',
+    views.UserViewSet,
+    basename='users'
+)
+
+# RegisterView Groups Users
+router.register(
+    r'groups',
+    views.GroupViewSet,
+    basename='groups'
+)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -51,5 +64,8 @@ urlpatterns = [
     # URLS routers
     path('', include(router.urls)),
 
-    # Views django user
+    # Views django users
+
+    # Views biblioteca API
+"""     path('api/', include(router_biblioteca)), """
 ]
