@@ -33,20 +33,10 @@ schema_view = get_schema_view(
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-
 # RegisterView Users
-router.register(
-    r'users',
-    views.UserViewSet,
-    basename='users'
-)
-
+router.register(r'users', views.UserViewSet)
 # RegisterView Groups Users
-router.register(
-    r'groups',
-    views.GroupViewSet,
-    basename='groups'
-)
+router.register(r'groups', views.GroupViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -67,5 +57,5 @@ urlpatterns = [
     # Views django users
 
     # Views biblioteca API
-"""     path('api/', include(router_biblioteca)), """
+    path('api/', include(router_biblioteca.urls))
 ]
